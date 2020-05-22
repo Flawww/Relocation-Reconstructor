@@ -24,7 +24,7 @@
     <ClCompile Include="module_relocation_information.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="relocater.cpp">
+    <ClCompile Include="relocator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

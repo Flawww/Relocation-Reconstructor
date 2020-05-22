@@ -54,6 +54,14 @@ bool module_relocation_information::init(std::string folder_path, module_section
     for (auto& mod : mod_kvp) {
         info.module_name = mod.first;
 
+        // add the module 
+        mapped_module_information module_info;
+        module_info.module_name = mod.first;
+        module_info.base_address = mod.second["BASEADDR"];
+        module_info.size_of_image = mod.second["SIZEOFIMAGE"];
+        m_mapped_modules.push_back(module_info);
+
+        // add reverse lookups for exports
         auto exports_kvp = mod.second.get<json::object_t>();
         for (auto& ex : exports_kvp) {
             info.export_name = ex.first;
@@ -101,4 +109,21 @@ export_information* module_relocation_information::get_export_for_address(uintpt
         return nullptr; // didnt find it
     
     return &((*it)->second);
+}
+
+direct_memory_reference module_relocation_information::get_direct_memory_reference(uintptr_t addr) {
+    direct_memory_reference out;
+    out.valid = false;
+
+    for (auto& it : m_mapped_modules) {
+        if (addr < it.base_address || addr > (it.base_address + it.size_of_image))
+            continue;
+
+        // found it
+        out.module_name = it.module_name;
+        out.rva = addr - it.base_address;
+        out.valid = true;
+    }
+
+    return out;
 }

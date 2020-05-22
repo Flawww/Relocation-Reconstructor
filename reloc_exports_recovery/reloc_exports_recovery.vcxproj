@@ -162,7 +162,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="relocater.cpp" />
+    <ClCompile Include="relocator.cpp" />
     <ClCompile Include="reloc_exports_recovery.cpp" />
   </ItemGroup>
   <ItemGroup>
