@@ -75,7 +75,12 @@ bool module_relocation_information::init(std::string folder_path, module_section
 
     printf("Enter module base/load address (BASE 16): ");
     std::getline(std::cin, start_addr);
+#ifdef _WIN64
+    m_sections.base_address = std::stoull(start_addr, nullptr, 16);
+#else
     m_sections.base_address = std::stoul(start_addr, nullptr, 16);
+#endif
+    
 
     //m_sections.sections[TEXT].start_offset = section_info->sections[TEXT].start_offset;
     //m_sections.sections[TEXT].end_offset = section_info->sections[TEXT].end_offset;
