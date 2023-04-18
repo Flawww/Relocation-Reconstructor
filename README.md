@@ -10,6 +10,7 @@ Furthermore, it does require dumping more information than just the binary data 
 
 ## Usage
 When ran, the program will prompt you to input a folder path for each dump to load. You need atleast 2 dumps from different sessions so the comparison heuristic works properly.
+
 After inputting the dumps, the relocation will start. When this is done sucessfully, it will output a `relocated.dll`, which has a fixed IAT section and .reloc section appended to it, along with a file called `reloc_info.txt`, which contains various relocation, iat, and memory reference information which can be used to properly load the relocated dll.
 
 An example of a run can look like the following:
@@ -17,6 +18,7 @@ An example of a run can look like the following:
 
 ### Input data and format
 In the same directory as the executable, have a folder for each unique dump that you are going to compare, the folder which you input must contain 2 files, a file called `mem.bin`, and a file called `exports.txt`.
+
 `mem.bin` is the raw binary data of the executable/shellcode you want to fix.
 `exports.txt` contains the addresses for all the functions exported by every dll loaded in the process at the time of dump. This looks something like the following, where the long number is the address of said function:
 ```
@@ -37,7 +39,8 @@ In the same directory as the executable, have a folder for each unique dump that
 ```
 
 ### Static analysis
-The output dll, which has the fixed IAT's and relocation section appended to it will still have an invalid PE header, so this needs to be manually fixed before it can be loaded into a dissasembler. Fixing the headers to be compatible with a dissasembler is quite trivial with a program like CFF Explorer, where you can easily modify the header. After this is done it should be like analyzing a binary which had its relocations and IAT's intact.
+The output dll, which has the fixed IAT's and relocation section appended to it will still have an invalid PE header, so this needs to be manually fixed before it can be loaded into a dissasembler. 
+Fixing the headers to be compatible with a dissasembler is quite trivial with a program like CFF Explorer, where you can easily modify the header. After this is done it should be like analyzing a binary which had its relocations and IAT's intact.
 
 ### Loading a relocated binary
 Please refer to the file [load_example.cpp](load_example.cpp) to see an example how the output of the reconstructor can be used to load and execute a relocated binary
