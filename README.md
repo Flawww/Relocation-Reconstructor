@@ -27,9 +27,9 @@ In the same directory as the executable, have a folder for each unique dump that
         ...
     },
     "ntdll.dll": {
-		"A_SHAFinal": 140721518593232,
-		"A_SHAInit": 140721518593536,
-		"A_SHAUpdate": 140721518593600,
+        "A_SHAFinal": 140721518593232,
+        "A_SHAInit": 140721518593536,
+        "A_SHAUpdate": 140721518593600,
         ...
     },
     ...
